@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cx.model.models.Subject" table="subject" lazy="false">
+		<id name="id" column="id" type="integer">
+			<generator class="native" />
+		</id>
+		<property name="enable" column="enable" type="boolean" not-null="true" />
+		<property name="name" column="name" type="string" not-null="true" unique="true" />
+		<!-- <property name="code" column="code" type="string" not-null="true" unique="true" /> -->
+		<many-to-one name="project" class="com.cx.model.models.Project" foreign-key="FK_subject_project" index="IDX_subject_projectId">
+			<column name="projectId" not-null="false" />
+		</many-to-one>
+		<property name="createTime" column="createTime" type="calendar" not-null="true" />
+		<property name="flag" column="flag" type="string" not-null="true" />
+	</class>
+</hibernate-mapping> 

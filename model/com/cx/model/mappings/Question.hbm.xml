@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.cx.model.models.Question" table="question" lazy="false">
+
+		<id name="id" column="id" type="integer">
+			<generator class="native" />
+		</id>
+
+		<version name="version" column="version" type="integer" />
+		<property name="enable" column="enable" type="boolean"
+			not-null="true" />
+		<property name="name" column="name" type="string" not-null="true" />
+		<property name="updateTime" column="updateTime" type="calendar"
+			not-null="true" />
+		<property name="no" column="no" type="integer" />
+		<many-to-one name="questionType" class="com.cx.model.models.QuestionType"
+			foreign-key="FK_question_questionType" index="IDX_question_questionTypeId">
+			<column name="questionTypeId" not-null="false" />
+		</many-to-one>
+		<property name="auditStage" not-null="true" length="5">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.cx.web.utils.QuestionAuditStage</param>
+				<!-- 12为java.sql.Types.VARCHAR常量值，即保存枚举的字面值到数据库。如果不指定type参数，保存枚举的索引值(从0开始)到数据库 -->
+				<!-- <param name="type">0</param> -->
+			</type>
+		</property>
+		<many-to-one name="subject" class="com.cx.model.models.Subject"
+			foreign-key="FK_question_subject" index="IDX_question_subjectId">
+			<column name="subjectId" not-null="false" />
+		</many-to-one>
+		<many-to-one name="project" class="com.cx.model.models.Project"
+			foreign-key="FK_question_project" index="IDX_question_projectId">
+			<column name="projectId" not-null="false" />
+		</many-to-one>
+	</class>
+</hibernate-mapping> 
