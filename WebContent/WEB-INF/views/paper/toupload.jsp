@@ -52,7 +52,7 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 					<div class="portlet box light-grey">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="icon-upload"></i>导入Excel
+								<i class="icon-upload"></i>上传文件
 							</div>
 						</div>
 
@@ -82,7 +82,7 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 											   </div>
 											</div>
 										</div> 
-										<div style="text-align: right ;"><input type="button" onClick="uploadFile()" value="导入" class="btn btn-success"></div>
+										<div style="text-align: right ;"><input type="button" onClick="uploadFile()" value="上传" class="btn btn-success"></div>
 									    <div id="progressNumber" style="margin-top:5%; width:100%; height:25px; text-align:right; line-height:25px;"></div> 
 									    <div id="progressShow"></div>
 									</div>
@@ -104,7 +104,6 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 			$('input[id=lefile]').change(function() {
 				var file = document.getElementById('lefile').files[0];
 				if (file) {
-					alert("dd");
 			      $('#photoCover').val(file.name);
 					var info = '<strong>上传文件</strong>: ' + file.name + '<br/><strong>上传类型</strong>: ' + file.type+ '<br/><strong>文件大小</strong>: ' + file.size;
 					$("#fileinfo").html(info);
@@ -127,7 +126,7 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 		        else
 		            fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
 				var ext=test(file.name).toLowerCase();
-				var extStr=".xls";
+				var extStr=".xls.chm";
 				$("#fileNamediv").html('');
 				$("#fileSize").html('');
 				$("#fileType").html('');
@@ -136,6 +135,8 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 				$("#progressNumber").html('');
 				if(extStr.indexOf(ext)==-1){
 					alert("上传文件类型非法(支持："+extStr+")");
+				/* }else if(file.size > 1024 * 1024 * 50){
+					alert("上传文件大小超出限制(50M)"); */
 				}else if(file.size > 1024 * 1024 * 1){
 					alert("上传文件大小超出限制(1M)");
 				}else{
@@ -165,11 +166,10 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 		    xhr.addEventListener("load", uploadComplete, false);
 		    xhr.addEventListener("error", uploadFailed, false);
 		    xhr.addEventListener("abort", uploadCanceled, false);
-		    xhr.open("POST", "/OnlineMark/test/importExcel");
+		    xhr.open("POST", "/OnlineMark/test/upload");
 		    xhr.send(fd);
 		}
 		function uploadProgress(evt) {
-			//alert(evt.loaded);
 			if (evt.lengthComputable) {
 		    	var percentComplete = Math.round(evt.loaded * 100 / evt.total);
 				$("#progressNumber").html('<div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 	style="width: ' + percentComplete.toString()+ '%;"><span class="sr-only">' + percentComplete.toString() + '% 完成（信息）</span>' + percentComplete.toString() + '%</div></div>');

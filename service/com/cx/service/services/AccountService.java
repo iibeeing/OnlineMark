@@ -90,6 +90,14 @@ public class AccountService extends EnableEntityService<Integer, Account, IAccou
 		account.setPassword(DESUtils.encryptString(account.getPassword()));
 		account.setRegisterTime(Calendar.getInstance());
 		super.save(account);
+		/*if(1==1){
+			try {
+				throw new EntityOperateException("1==1 必须抛出异常！");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}*/
 	}
 	
 	@SuppressWarnings("unchecked")
