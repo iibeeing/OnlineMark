@@ -17,6 +17,7 @@ import com.cx.model.models.Subject;
 import com.cx.service.interfaces.IProjectService;
 import com.cx.service.interfaces.ISubjectService;
 import com.cx.utils.ParamInteger;
+import com.cx.web.models.SubjectSearchModel;
 import com.infrastructure.project.base.service.services.EnableEntityService;
 import com.infrastructure.project.common.exception.EntityOperateException;
 import com.infrastructure.project.common.exception.ValidatException;
@@ -66,11 +67,10 @@ public class SubjectService extends EnableEntityService<Integer, Subject, ISubje
 	}
 
 	@Override
-	public PageList<Subject> listNoPage(Subject subject, int pageNo, int pageSize) {
+	public PageList<Subject> listNoPage(SubjectSearchModel searchModel, int pageNo, int pageSize) {
 		// TODO Auto-generated method stub
 		ParamInteger count = new ParamInteger();
-		List<Subject> items = subjectDao.listNoPage(subject, pageNo, pageSize ,count);
-		System.out.println(count.getValue());
+		List<Subject> items = subjectDao.listNoPage(searchModel, pageNo, pageSize ,count);
 		return PageListUtil.getPageList(count.getValue(), pageNo, items, pageSize);
 	}
 	

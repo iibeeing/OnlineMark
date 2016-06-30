@@ -1,12 +1,9 @@
 package com.cx.web.controllers;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.cx.model.models.Project;
 import com.cx.model.models.Subject;
 import com.cx.service.interfaces.ISubjectService;
@@ -27,7 +23,6 @@ import com.cx.web.models.SubjectSearchModel;
 import com.cx.web.models.extension.SubjectModelExtension;
 import com.infrastructure.project.common.exception.EntityOperateException;
 import com.infrastructure.project.common.exception.ValidatException;
-import com.infrastructure.project.common.utilities.PageList;
 import com.infrastructure.project.common.utilities.PageListUtil;
 
 /**
@@ -56,7 +51,7 @@ public class SubjectController extends BaseController {
         
         //model.addAttribute("contentModel", subjectService.listPage(searchModel.getName(), searchModel.getEnable(), pageNo, pageSize));
         //PageList<Subject> list = new PageList<Subject>(10, pageNo, pageSize, subjectService.listNoPage(null));
-        model.addAttribute("contentModel", subjectService.listNoPage(null,pageNo, pageSize));
+        model.addAttribute("contentModel", subjectService.listNoPage(searchModel,pageNo, pageSize));
         return "subject/list";
     }
 	

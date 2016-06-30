@@ -25,4 +25,9 @@ public class SubjectSearchModel {
 	public void setEnable(Boolean enable) {
 		this.enable = enable;
 	}
+
+	@Override
+	public String toString() {
+		return "SubjectSearchModel [name=" + name + ", enable=" + enable + "]";
+	}
 }

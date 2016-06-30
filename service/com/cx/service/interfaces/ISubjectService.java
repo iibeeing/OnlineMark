@@ -6,6 +6,7 @@ import java.util.List;
 import com.cx.dao.interfaces.ISubjectDao;
 import com.cx.model.models.Project;
 import com.cx.model.models.Subject;
+import com.cx.web.models.SubjectSearchModel;
 import com.infrastructure.project.base.service.interfaces.IEnableEntityService;
 import com.infrastructure.project.common.exception.EntityOperateException;
 import com.infrastructure.project.common.exception.ValidatException;
@@ -19,7 +20,7 @@ import com.infrastructure.project.common.utilities.PageList;
  */
 public interface ISubjectService extends IEnableEntityService<Integer, Subject, ISubjectDao> {
 	public PageList<Subject> listPage(String name, Boolean enable, int pageNo, int pageSize);
-	public PageList<Subject> listNoPage(Subject subject, int pageNo, int pageSize);
+	public PageList<Subject> listNoPage(SubjectSearchModel searchModel, int pageNo, int pageSize);
 	public boolean exist(String name);
 	public void saveObject(Subject subject) throws NoSuchAlgorithmException, EntityOperateException, ValidatException;
 }
