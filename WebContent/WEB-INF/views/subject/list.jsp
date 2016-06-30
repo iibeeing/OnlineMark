@@ -138,7 +138,7 @@
 		                        <thead>
 		                           <tr>
 		                              <th class="table-checkbox"><input type="checkbox" class="group-checkable"/></th>
-		                              <th>科目名称</th>
+		                              <th >科目名称</th>
 		                              <th >是否可用</th>
 		                              <th >状态</th>
 		                              <th >所属考试</th>
@@ -163,7 +163,7 @@
 	                     </div>
 	                     <c:import url = "../shared/paging.jsp">
 	        				<c:param name="pageModelName" value="contentModel"/>
-	        				<c:param name="urlAddress" value="/project/list"/>
+	        				<c:param name="urlAddress" value="/subject/list"/>
 	       				 </c:import>
        				 </div>
                   </div>

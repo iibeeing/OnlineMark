@@ -110,6 +110,26 @@
 							   </div>
 							   <!--/span-->
 							</div>
+							
+							<div class="row">
+							   <div class="col-md-6">
+								  <div class="form-group">
+									 <label class="control-label col-md-3">科目名称</label>
+									 <%-- <div class="col-md-9">
+										<form:input path="name" class="form-control placeholder-no-fix" autocomplete="off" placeholder="考试名称"/>
+									 </div> --%>
+									 <div class="col-md-9">
+		                                 <form:select path="name" class="form-control">  
+							                <option value="">请选择</option>  
+							                <%-- <form:options items="${selectDataSource}"/>   --%>
+							           	 </form:select>
+	                              	 </div>
+								  </div>
+							   </div>
+							</div>
+							
+							
+							
 						 </div>
 						 <div class="form-actions">
 							<div class="row">

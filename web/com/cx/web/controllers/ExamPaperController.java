@@ -1,6 +1,10 @@
 package com.cx.web.controllers;
 
+import java.io.File;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cx.service.interfaces.IPaperService;
 import com.cx.web.auth.AuthPassport;
@@ -41,5 +49,24 @@ public class ExamPaperController extends BaseController {
 	@RequestMapping(value = "/toupload", method = {RequestMethod.GET})
 	public String toUpload(HttpServletRequest request, Model model){
         return "paper/toupload";
+	}
+	
+	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)
+	public ModelAndView excelUpload(Exception ex,@RequestParam("fileToUpload") MultipartFile file,@RequestParam("remark") String remark,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		if (ex instanceof MaxUploadSizeExceededException) {
+			return null;
+		}
+
+		if (!file.isEmpty()) {
+			String add = request.getSession().getServletContext().getRealPath("/") + "files/";
+			String fileName = file.getOriginalFilename();
+			try {
+				file.transferTo(new File(add + fileName));
+			}catch (Exception e) {
+			}
+		}
+		return null;
 	}
 }

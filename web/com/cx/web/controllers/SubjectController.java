@@ -1,6 +1,7 @@
 package com.cx.web.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import com.cx.web.models.SubjectSearchModel;
 import com.cx.web.models.extension.SubjectModelExtension;
 import com.infrastructure.project.common.exception.EntityOperateException;
 import com.infrastructure.project.common.exception.ValidatException;
+import com.infrastructure.project.common.utilities.PageList;
 import com.infrastructure.project.common.utilities.PageListUtil;
 
 /**
@@ -52,7 +54,9 @@ public class SubjectController extends BaseController {
         int pageNo = ServletRequestUtils.getIntParameter(request, PageListUtil.PAGE_NO_NAME, PageListUtil.DEFAULT_PAGE_NO);
         int pageSize = ServletRequestUtils.getIntParameter(request, PageListUtil.PAGE_SIZE_NAME, PageListUtil.DEFAULT_PAGE_SIZE);      
         
-        model.addAttribute("contentModel", subjectService.listPage(searchModel.getName(), searchModel.getEnable(), pageNo, pageSize));
+        //model.addAttribute("contentModel", subjectService.listPage(searchModel.getName(), searchModel.getEnable(), pageNo, pageSize));
+        //PageList<Subject> list = new PageList<Subject>(10, pageNo, pageSize, subjectService.listNoPage(null));
+        model.addAttribute("contentModel", subjectService.listNoPage(null,pageNo, pageSize));
         return "subject/list";
     }
 	

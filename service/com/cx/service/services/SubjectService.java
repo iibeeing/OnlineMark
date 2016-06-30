@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.cx.dao.interfaces.ISubjectDao;
+import com.cx.model.models.Project;
 import com.cx.model.models.Subject;
+import com.cx.service.interfaces.IProjectService;
 import com.cx.service.interfaces.ISubjectService;
+import com.cx.utils.ParamInteger;
 import com.infrastructure.project.base.service.services.EnableEntityService;
 import com.infrastructure.project.common.exception.EntityOperateException;
 import com.infrastructure.project.common.exception.ValidatException;
@@ -22,6 +25,13 @@ import com.infrastructure.project.common.utilities.PageListUtil;
 
 @Service("SubjectService")
 public class SubjectService extends EnableEntityService<Integer, Subject, ISubjectDao> implements ISubjectService {
+	@Autowired
+    @Qualifier("ProjectService")
+	protected IProjectService projectService;
+	
+	@Autowired
+    @Qualifier("SubjectDao")
+	protected ISubjectDao subjectDao;
 	
 	@Autowired
 	public SubjectService(@Qualifier("SubjectDao") ISubjectDao objectDao) {
@@ -43,7 +53,9 @@ public class SubjectService extends EnableEntityService<Integer, Subject, ISubje
 			countCriteria.add(Restrictions.eq("enable", enable));
 			listCriteria.add(Restrictions.eq("enable", enable));
 		}
-
+		//获取可用的Project列表
+		List<Project> ableProjectList = projectService.listEnable();
+		listCriteria.add(Restrictions.in("project", ableProjectList));
 		listCriteria.setFirstResult((pageNo - 1) * pageSize);
 		listCriteria.setMaxResults(pageSize);
 		List<Subject> items = listCriteria.list();
@@ -53,6 +65,15 @@ public class SubjectService extends EnableEntityService<Integer, Subject, ISubje
 		return PageListUtil.getPageList(count, pageNo, items, pageSize);
 	}
 
+	@Override
+	public PageList<Subject> listNoPage(Subject subject, int pageNo, int pageSize) {
+		// TODO Auto-generated method stub
+		ParamInteger count = new ParamInteger();
+		List<Subject> items = subjectDao.listNoPage(subject, pageNo, pageSize ,count);
+		System.out.println(count.getValue());
+		return PageListUtil.getPageList(count.getValue(), pageNo, items, pageSize);
+	}
+	
 	@Override
 	public boolean exist(String name) {
 		return false;
@@ -64,4 +85,5 @@ public class SubjectService extends EnableEntityService<Integer, Subject, ISubje
 		subject.setCreateTime(Calendar.getInstance());
 		super.save(subject);
 	}
+
 }

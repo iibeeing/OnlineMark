@@ -166,7 +166,12 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 		    xhr.addEventListener("load", uploadComplete, false);
 		    xhr.addEventListener("error", uploadFailed, false);
 		    xhr.addEventListener("abort", uploadCanceled, false);
-		    xhr.open("POST", "/OnlineMark/test/upload");
+		    //xhr.open("POST", "/OnlineMark/test/upload");
+		    //var url = "${ctx}/upload";
+		    var url = "${ctx}/paper/upload.do";
+		    xhr.open("POST", url);
+		    //xhr.open("POST", "D:\pic");
+		    alert(url);
 		    xhr.send(fd);
 		}
 		function uploadProgress(evt) {
