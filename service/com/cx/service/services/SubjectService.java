@@ -16,7 +16,7 @@ import com.cx.model.models.Project;
 import com.cx.model.models.Subject;
 import com.cx.service.interfaces.IProjectService;
 import com.cx.service.interfaces.ISubjectService;
-import com.cx.utils.ParamInteger;
+import com.cx.utils.ParamReference;
 import com.cx.web.models.SubjectSearchModel;
 import com.infrastructure.project.base.service.services.EnableEntityService;
 import com.infrastructure.project.common.exception.EntityOperateException;
@@ -69,9 +69,9 @@ public class SubjectService extends EnableEntityService<Integer, Subject, ISubje
 	@Override
 	public PageList<Subject> listNoPage(SubjectSearchModel searchModel, int pageNo, int pageSize) {
 		// TODO Auto-generated method stub
-		ParamInteger count = new ParamInteger();
+		ParamReference count = new ParamReference();
 		List<Subject> items = subjectDao.listNoPage(searchModel, pageNo, pageSize ,count);
-		return PageListUtil.getPageList(count.getValue(), pageNo, items, pageSize);
+		return PageListUtil.getPageList(count.getIntegerValue(), pageNo, items, pageSize);
 	}
 	
 	@Override

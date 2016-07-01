@@ -7,16 +7,16 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import com.cx.dao.interfaces.ISubjectDao;
 import com.cx.model.models.Subject;
-import com.cx.utils.ParamInteger;
+import com.cx.utils.ParamReference;
 import com.cx.web.models.SubjectSearchModel;
 import com.infrastructure.project.base.dao.daos.EnableEntityDao;
 
 @Repository("SubjectDao")
 public class SubjectDao extends EnableEntityDao<Integer, Subject> implements ISubjectDao {
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Subject> listNoPage(SubjectSearchModel searchModel, int pageNo, int pageSize, ParamInteger count) {
-		System.out.println(searchModel);
+	public List<Subject> listNoPage(SubjectSearchModel searchModel, int pageNo, int pageSize, ParamReference count) {
 		Session session = getSession();
 		String hql = "From Subject s where s.project.enable=:projectenable";
 		if(searchModel != null && searchModel.getName() != null && !"".equals(searchModel.getName())){
@@ -33,8 +33,7 @@ public class SubjectDao extends EnableEntityDao<Integer, Subject> implements ISu
 		if(searchModel != null && searchModel.getEnable() != null){
 			query.setParameter("enable", searchModel.getEnable());
 		}
-		System.out.println(hql);
-		count.setValue(query.list().size());
+		count.setIntegerValue(query.list().size());
 		query.setFirstResult((pageNo - 1) * pageSize);
 		query.setMaxResults(pageSize);
 		return query.list();
