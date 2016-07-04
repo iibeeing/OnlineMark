@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" 
 import="com.infrastructure.project.common.extension.UrlHelper"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../shared/taglib.jsp"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="../shared/taglib.jsp"%>
@@ -47,6 +48,7 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 					</ul>
 				</div>
 			</div>
+			
 			<div class="row">
 				<div class="col-md-12">
 					<div class="portlet box light-grey">
@@ -57,9 +59,23 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 						</div>
 
 						<div class="portlet-body">
-							<form name="userForm" action="upload" method="post" enctype="multipart/form-data">
-									<div>
-										<div>
+							<!-- <form name="userForm" action="upload" method="post" enctype="multipart/form-data"> -->
+							<form:form modelAttribute="contentModel" class="form-horizontal" method="POST">
+								<div>
+									<div class="form-body">
+									<div class="row">
+									  <div class="form-group">
+									  	<label  class="col-md-2 control-label">绑定科目</label>
+						                <div class="col-md-10">
+						                	<form:select path="subjectId" class="form-control">
+						                		<option value="">请选择</option>  
+											    <form:options items="${selectDataSource}"/>  
+								        	</form:select>
+						               	</div>
+						              </div>
+						            </div>
+						           <div class="row">
+						           	<div>
 									    <fieldset>
 									    <div>  
 										    <!-- <label>选择文件：</label> -->  
@@ -88,8 +104,12 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 									</div>
 								</fieldset>
 							</div>
-						</div>	
-					</form>
+						</div>
+					</div>
+				</div>
+
+					<!-- </form> -->
+					</form:form>
 				</div>
 			</div>
 		</div>
@@ -99,6 +119,9 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 	
 	<%@ include file="../shared/pageFooter.jsp"%>
 	<script type="text/javascript">
+/*  	  $(function() {   
+          App.init();
+       }); */
 		$(function() {
 			App.init();
 			$('input[id=lefile]').change(function() {
@@ -160,7 +183,7 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 		    	return false;
 		    }
 		    fd.append("fileToUpload", file);
-		    fd.append("remark", $("#remark").val());
+		    fd.append("subjectId", $("#subjectId").val());
 		    var xhr = new XMLHttpRequest();
 		    xhr.upload.addEventListener("progress", uploadProgress, false);
 		    xhr.addEventListener("load", uploadComplete, false);
@@ -171,7 +194,7 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 		    var url = "${ctx}/paper/upload.do";
 		    xhr.open("POST", url);
 		    //xhr.open("POST", "D:\pic");
-		    alert(url);
+		    //alert(url);
 		    xhr.send(fd);
 		}
 		function uploadProgress(evt) {
@@ -183,6 +206,9 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 		    }
 		}
 		function uploadComplete(evt) {
+			window.location.href="${ctx}/paper/list";
+			//window.open('${ctx}/paper/list'); 
+/* 			alert(evt.target.responseText);
 			if(jQuery.parseJSON(evt.target.responseText).statusCode==DWZ.statusCode.ok){
 				alertMsg.info(jQuery.parseJSON(evt.target.responseText).message);
 				$("#progressNumber").hide();
@@ -192,7 +218,7 @@ import="com.infrastructure.project.common.extension.UrlHelper"%>
 				$("#progressNumber").hide();
 			}
 			
-			$("#background,#progressBar").hide();
+			$("#background,#progressBar").hide(); */
 		}
 		function uploadFailed(evt) {
 			alert("一个试图上传文件时出现错误.");

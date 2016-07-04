@@ -2,7 +2,9 @@ package com.cx.service.services;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
@@ -86,4 +88,15 @@ public class SubjectService extends EnableEntityService<Integer, Subject, ISubje
 		super.save(subject);
 	}
 
+	@Override
+	public Map<Integer, String> getTotallyEnableSelectSource() {
+		List<Subject> list = this.listEnable();
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		for(Subject subject : list){
+			if(subject.getProject().getEnable()){
+				map.put(subject.getId(), subject.getProject().getName() + " : " + subject.getName());
+			}
+		}
+		return map;
+	}
 }

@@ -119,9 +119,9 @@
 										<form:input path="name" class="form-control placeholder-no-fix" autocomplete="off" placeholder="考试名称"/>
 									 </div> --%>
 									 <div class="col-md-9">
-		                                 <form:select path="name" class="form-control">  
+		                                 <form:select path="subjectId" class="form-control">  
 							                <option value="">请选择</option>  
-							                <%-- <form:options items="${selectDataSource}"/>   --%>
+							                <form:options items="${selectDataSource}"/>  
 							           	 </form:select>
 	                              	 </div>
 								  </div>
@@ -185,7 +185,7 @@
 	                     </div>
 	                     <c:import url = "../shared/paging.jsp">
 	        				<c:param name="pageModelName" value="contentModel"/>
-	        				<c:param name="urlAddress" value="/project/list"/>
+	        				<c:param name="urlAddress" value="/paper/list"/>
 	       				 </c:import>
        				 </div>
                   </div>
@@ -208,16 +208,13 @@
              items: [
 				 { link: true, display: "上传", css: "icon-upload", showIcon: true, url: "<%=UrlHelper.resolveWithReturnUrl("/paper/toupload", request.getAttribute("requestUrl"), request.getAttribute("requestQuery"), pageContext)%>" },
 				 { splitter: true }, 
-				 { link: true, display: "编辑", css: "icon-edit", showIcon: true, url: "<%=UrlHelper.resolveWithReturnUrl("/subject/edit/{0}", request.getAttribute("requestUrl"), request.getAttribute("requestQuery"), pageContext)%>", 
-					  	selector: "#data-table .checkboxes", mustSelect: "请先选择数据！", singleSelect: "该操作只支持单选！"},
-				 { splitter: true }, 
-                 { link: true, display: "启用", css: "icon-ok", showIcon: true, url: "<%=UrlHelper.resolveWithReturnUrl("/subject/enable/{0}", request.getAttribute("requestUrl"), request.getAttribute("requestQuery"), pageContext)%>",
+                 { link: true, display: "启用", css: "icon-ok", showIcon: true, url: "<%=UrlHelper.resolveWithReturnUrl("/paper/enable/{0}", request.getAttribute("requestUrl"), request.getAttribute("requestQuery"), pageContext)%>",
                 	 selector: "#data-table .checkboxes", mustSelect: "请先选择数据！", singleSelect: "该操作只支持单选！"},
                  { splitter: true }, 
-                 { link: true, display: "禁用", css: "icon-remove", showIcon: true, url: "<%=UrlHelper.resolveWithReturnUrl("/subject/disable/{0}", request.getAttribute("requestUrl"), request.getAttribute("requestQuery"), pageContext)%>", 
+                 { link: true, display: "禁用", css: "icon-remove", showIcon: true, url: "<%=UrlHelper.resolveWithReturnUrl("/paper/disable/{0}", request.getAttribute("requestUrl"), request.getAttribute("requestQuery"), pageContext)%>", 
                  	 selector: "#data-table .checkboxes", mustSelect: "请先选择数据！", singleSelect: "该操作只支持单选！"},
                  { splitter: true }, 
-                 { link: true, display: "删除", css: "icon-trash", showIcon: true, url: "<%=UrlHelper.resolveWithReturnUrl("/subject/delete/{0}", request.getAttribute("requestUrl"), request.getAttribute("requestQuery"), pageContext)%>", 
+                 { link: true, display: "删除", css: "icon-trash", showIcon: true, url: "<%=UrlHelper.resolveWithReturnUrl("/paper/delete/{0}", request.getAttribute("requestUrl"), request.getAttribute("requestQuery"), pageContext)%>", 
                    	 selector: "#data-table .checkboxes", mustSelect: "请先选择数据！", singleSelect: "该操作只支持单选！", confirm: "确认删除所选数据吗？"}
              ]
          });

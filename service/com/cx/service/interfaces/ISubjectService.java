@@ -2,6 +2,7 @@ package com.cx.service.interfaces;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 
 import com.cx.dao.interfaces.ISubjectDao;
 import com.cx.model.models.Project;
@@ -23,4 +24,5 @@ public interface ISubjectService extends IEnableEntityService<Integer, Subject, 
 	public PageList<Subject> listNoPage(SubjectSearchModel searchModel, int pageNo, int pageSize);
 	public boolean exist(String name);
 	public void saveObject(Subject subject) throws NoSuchAlgorithmException, EntityOperateException, ValidatException;
+	public Map<Integer, String> getTotallyEnableSelectSource();
 }
