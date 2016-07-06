@@ -65,7 +65,6 @@
                   </div>
                   <div class="portlet-body form">
                      <form:form modelAttribute="contentModel" class="form-horizontal" method="POST">
-                     <%-- <form:form modelAttribute="contentModel" class="form-horizontal" method="POST" action="/project/add"> --%>
                         <div class="form-body">
                            <div class="form-group">
                               <label  class="col-md-2 control-label">名称</label>

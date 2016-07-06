@@ -1,7 +1,6 @@
 package com.cx.web.controllers;
 
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cx.model.models.Paper;
 import com.cx.model.models.Subject;
@@ -31,7 +29,6 @@ import com.cx.service.interfaces.ISubjectService;
 import com.cx.web.auth.AuthPassport;
 import com.cx.web.models.PaperEditModel;
 import com.cx.web.models.PaperSearchModel;
-import com.cx.web.models.SubjectEditModel;
 import com.infrastructure.project.common.exception.EntityOperateException;
 import com.infrastructure.project.common.exception.ValidatException;
 import com.infrastructure.project.common.utilities.PageListUtil;

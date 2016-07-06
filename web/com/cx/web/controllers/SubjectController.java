@@ -1,7 +1,5 @@
 package com.cx.web.controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +72,7 @@ public class SubjectController extends BaseController {
         	return add(request, model);		
         }
         String returnUrl = ServletRequestUtils.getStringParameter(request, "returnUrl", null);
-        System.out.println("时间： " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime()) + " returnUrl --- " + returnUrl);
         Subject subject=SubjectModelExtension.toObject(editModel);
-        System.out.println("---- " + editModel.getProjectId());
         Project project = projectService.get(editModel.getProjectId());
         if(project != null){
         	subject.setProject(project);
