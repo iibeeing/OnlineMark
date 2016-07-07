@@ -17,9 +17,14 @@
 <meta name="MobileOptimized" content="320">
 <%@ include file="../shared/importCss.jsp"%>
 <link rel="stylesheet"
+	href="<c:url value='/css/toolbarStyle.css'/>"
+	type="text/css" />
+<link rel="stylesheet"
 	href="<c:url value='/plugins/data-tables/DT_bootstrap.css'/>"
 	type="text/css" />
+	
 <%@ include file="../shared/importJs.jsp"%>
+
 <script type="text/javascript"
 	src="<c:url value='/plugins/data-tables/jquery.dataTables.js'/>"></script>
 <script type="text/javascript"
@@ -31,6 +36,8 @@
 <script type="text/javascript" src="<c:url value='/js/app.js'/>"></script>
 <script type="text/javascript"
 	src="<c:url value='/js/jquery.tableManaged.js'/>"></script>
+	
+	
 <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body class="page-header-fixed">
@@ -57,14 +64,12 @@
 			</div>
 			<div class="row"></div>
 			
-			
 			<nav class="navbar navbar-inverse" role="navigation">
 			   <div class="navbar-header">
 			      <a class="navbar-brand" href="#">取题</a>
 			   </div>
 			   <div>
 			      <ul class="nav navbar-nav">
-			         <li class="active"><a href="#">iOS</a></li>
 			         <li><a href="#">SVN</a></li>
 			         <li class="dropdown">
 			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -82,13 +87,40 @@
 			         </li>
 			      </ul>
 			   </div>
+			   <div>
+			      <div>
+      <form class="navbar-form navbar-left" role="search">
+         <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+         </div>
+         <button type="submit" class="btn btn-default">提交</button>
+      </form>    
+   </div>
+			   </div>
 			   </nav>
 			   
 				<div class="panel panel-default">
 				   <div class="panel-heading">高数 A面（1-6题）</div>
-				   <div class="panel-body"><img src="http://www.w3school.com.cn/i/eg_tulip.jpg"></img></div>
-				</div>
+				   <!-- <div class="panel-body"><img src="http://www.w3school.com.cn/i/eg_tulip.jpg"></img></div> -->
+				   <div class="panel-body outer-box">
+				     <img src="http://img2.pconline.com.cn/pconline/0710/07/1121418_071010colourback01.jpg"></img>
+				     
+				     <div id="fixed">
+			            <dl>
+			            
+			            	<dd><div><font color="white">操作</font></div></dd>
+			                <!-- <dd><a href="#" class="dh">动画</a></dd>
+			                <dd><a href="#" class="pk165">小说</a></dd>
+			                <dd><a href="#" class="w267">社区</a></dd> -->
+			                <dt>
+			                    <a href="javascript:void(0);" class="slide-close"></a>
+			                </dt>
 
+			            </dl>
+			        </div>
+		        	<div id="expand"></div>
+				   </div>
+				</div>
 		</div>
 		
 
@@ -97,6 +129,26 @@
 			$(function() {
 				App.init();
 			});
+			
+			$(document).ready(function() {
+		        $("#fixed dt").click(function() {
+		            var _left = $("#fixed").offset().left;
+		            console.log(_left);
+		            if (_left >= 0) {
+		                $("#fixed").animate({
+		                    right: -60
+		                }, 300, 'swing', function() {
+		                    $("#expand").show().fadeIn(500);
+		                });
+		            }
+		        });
+		        $("#expand").click(function() {
+		        	$("#expand").hide().fadeOut(500);
+		            $("#fixed").animate({
+		                right: 0
+		            }, 300, 'swing', function() {});
+		        });
+		    });
 		</script>
 </body>
 </html>

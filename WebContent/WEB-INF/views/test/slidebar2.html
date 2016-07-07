@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div class="outer-box">
+        <div id="fixed">
+            <dl>
+                <dd><a href="#" class="web">页游</a></dd>
+                <dd><a href="#" class="mb">手游</a></dd>
+                <dd><a href="#" class="dj">动漫</a></dd>
+                <dd><a href="#" class="mh">漫画</a></dd>
+                <dd><a href="#" class="dh">动画</a></dd>
+                <dd><a href="#" class="pk165">小说</a></dd>
+                <dd><a href="#" class="w267">社区</a></dd>
+                <dt>
+                    <a href="javascript:void(0);" class="slide-close"></a>
+                </dt>
+            </dl>
+        </div>
+        <div id="expand"></div>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#fixed dt").click(function() {
+            var _left = $("#fixed").offset().left;
+            console.log(_left);
+            if (_left >= 0) {
+                $("#fixed").animate({
+                    right: -44
+                }, 300, 'swing', function() {
+                    $("#expand").show().fadeIn(500);
+                });
+            }
+        });
+        $("#expand").click(function() {
+        	$("#expand").hide().fadeOut(500);
+            $("#fixed").animate({
+                right: 0
+            }, 300, 'swing', function() {});
+        });
+    });
+    </script>
+</body>
+
+</html>
